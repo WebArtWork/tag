@@ -1,6 +1,6 @@
 module.exports = async (waw) => {
 	waw.tags = async (query = {}) => {
-		return waw.cache("tags", async () => {
+		return waw.cache("tags" +JSON.stringify(query), async () => {
 			return await waw.Tag.find(query).sort('category');
 		});
 	};
