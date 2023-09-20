@@ -1,7 +1,4 @@
 module.exports = async function (waw) {
-	const core = waw.Service('core');
-        await core.wait();
-	
 	const Schema = waw.mongoose.Schema({
 		category: { type: waw.mongoose.Schema.Types.ObjectId, ref: 'Category' },
 		name: String,
