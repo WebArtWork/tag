@@ -18,7 +18,9 @@ module.exports = async (waw) => {
 		//	});
 		}
 	};
-
+        const core = waw.Service('core');
+        await core.wait();
+	
 	waw.crud('category', {
 		create: {
 			ensure: waw.role('admin')
