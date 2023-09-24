@@ -13,9 +13,5 @@ module.exports = async function (waw) {
 
 	waw.Tag = waw.mongoose.model('Tag', Schema);
 
-	waw.Tag.deleteMany({
-		category: { $exists: false }
-	});
-
 	return waw.Tag;
 }
