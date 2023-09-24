@@ -18,7 +18,7 @@ module.exports = async function(waw) {
 		const tags = await waw.tags();
 		return waw.config.groups.map(g => {
 			categories = allCategories.filter(c=>c.group === g.name).map(c => {
-				c.tags = tags.filter(t => t.category.toString() === c._id.toString());
+				c.tags = tags.filter(t => t.category && c._id && t.category.toString() === c._id.toString());
 				return c;
 			});
 			return {
