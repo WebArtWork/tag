@@ -11,5 +11,11 @@ module.exports = async function (waw) {
 		this.description = obj.description;
 	}
 
-	return waw.Tag = waw.mongoose.model('Tag', Schema);
+	waw.Tag = waw.mongoose.model('Tag', Schema);
+
+	waw.Tag.deleteMany({
+		category: { $exists: false }
+	});
+
+	return waw.Tag;
 }
