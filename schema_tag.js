@@ -1,17 +1,15 @@
 module.exports = async function (waw) {
 	const Schema = waw.mongoose.Schema({
-		category: { type: waw.mongoose.Schema.Types.ObjectId, ref: 'Category' },
+		category: { type: waw.mongoose.Schema.Types.ObjectId, ref: "Category" },
 		name: String,
-		description: String
+		description: String,
 	});
 
 	Schema.methods.create = function (obj, user, sd) {
 		this.category = obj.category;
 		this.name = obj.name;
 		this.description = obj.description;
-	}
+	};
 
-	waw.Tag = waw.mongoose.model('Tag', Schema);
-
-	return waw.Tag;
-}
+	return waw.Tag = waw.mongoose.model("Tag", Schema);
+};

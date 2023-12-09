@@ -1,24 +1,24 @@
 module.exports = async (waw) => {
 	waw.categories = async (group = '', lean = true) => {
 		if (group) {
-		//	return waw.cache("category" + group, async () => {
-				const q = waw.Category.find({ group }).sort('group');
-				if (lean) {
-					q.lean();
-				}
-				return await q;
-		//	});
+			//	return waw.cache("category" + group, async () => {
+			const q = waw.Category.find({ group }).sort('group');
+			if (lean) {
+				q.lean();
+			}
+			return await q;
+			//	});
 		} else {
-		//	return waw.cache("categories", async () => {
-				const q = waw.Category.find({}).sort('group');
-				if (lean) {
-					q.lean();
-				}
-				return await q;
-		//	});
+			//	return waw.cache("categories", async () => {
+			const q = waw.Category.find({}).sort('group');
+			if (lean) {
+				q.lean();
+			}
+			return await q;
+			//	});
 		}
 	};
-	
+
 	waw.crud('category', {
 		create: {
 			ensure: waw.role('admin')

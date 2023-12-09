@@ -1,18 +1,18 @@
 module.exports = async (waw) => {
 	waw.tags = async (query = {}) => {
-	//	return waw.cache("tags" + JSON.stringify(query), async () => {	
-			return await waw.Tag.find(query).sort('category');	
-	//	});
+		//	return waw.cache("tags" + JSON.stringify(query), async () => {
+		return await waw.Tag.find(query).sort('category');
+		//	});
 	};
 	waw.tagsWithCategories = async (query = {}) => {
-	//	return waw.cache("tags" + JSON.stringify(query), async () => {
-			return await waw.Tag.find(query).sort('category').populate({
-				path: 'category',
-				select: 'name group'
-			});
-//	 });
+		//	return waw.cache("tags" + JSON.stringify(query), async () => {
+		return await waw.Tag.find(query).sort('category').populate({
+			path: 'category',
+			select: 'name group'
+		});
+		//	 });
 	};
-	
+
 	waw.crud('tag', {
 		create: {
 			ensure: waw.role('admin')
