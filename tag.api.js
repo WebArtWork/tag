@@ -85,15 +85,54 @@ module.exports = async (waw) => {
 		}
 	});
 
+	const reloads = {};
+	waw.addJson(
+		"storePrepareTags",
+		async (store, fillJson, req) => {
+			reloads[store._id] = reloads[store._id] || [];
+			const fillAllTags = async () => {
+				fillJson.allTags = await waw.Tag.find({
+					stores: store._id,
+				}).lean();
+				for (const tag of fillJson.allTags) {
+					tag.children = (tag.children || []).map(id => id.toString());
+					tag.parent = tag.parent && tag.parent.toString() || '';
+					tag._id = tag._id.toString();
+					tag.id = tag._id.toString();
+				}
+				fillJson.tags = fillJson.allTags.filter((t) => {
+					return !t.parent;
+				});
+				fillJson.tagsIds = fillJson.allTags.reduce(
+					(accumulator, currentDocument) => {
+						return accumulator
+							.concat(currentDocument.children)
+							.concat([currentDocument._id]);
+					},
+					[]
+				);
+			};
+			fillAllTags();
+			reloads[store._id].push(fillAllTags);
+		},
+		"Prepare updatable documents of tags"
+	);
+	const tagsUpdate = async (tag) => {
+		for (const storeId of (tag.stores || [])) {
+			for (const reload of (reloads[storeId] || [])) {
+				reload();
+			}
+		}
+	};
+	waw.on("tag_create", tagsUpdate);
+	waw.on("tag_update", tagsUpdate);
+	waw.on("tag_delete", tagsUpdate);
+
 	const load = async () => {
 		waw.allTags = await waw.Tag.find({});
 
 		waw.allCategories = await waw.Category.find({});
 	};
-
-
-
-
 
 	waw.getTag = (id) => {
 		return id ? waw.allTags.find((t) => t.id === id.toString()) : null;
