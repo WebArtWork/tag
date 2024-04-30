@@ -15,6 +15,7 @@
 					"children",
 					"stores",
 					"global",
+					"order",
 					"data"
 				]
 			},

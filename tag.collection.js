@@ -4,6 +4,7 @@ module.exports = async function (waw) {
 			type: Boolean,
 			default: false
 		},
+		order: String,
 		name: String,
 		description: String,
 		thumb: String,
@@ -21,6 +22,7 @@ module.exports = async function (waw) {
 	Schema.methods.create = function (obj, user) {
 		this.author = user._id;
 		this.enabled = obj.enabled;
+		this.order = obj.order;
 		this.name = obj.name;
 		this.data = obj.data;
 		this.description = obj.description;
