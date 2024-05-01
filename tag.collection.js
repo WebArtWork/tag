@@ -4,7 +4,7 @@ module.exports = async function (waw) {
 			type: Boolean,
 			default: false
 		},
-		order: String,
+		order: Number,
 		name: String,
 		description: String,
 		thumb: String,

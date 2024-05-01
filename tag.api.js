@@ -1,4 +1,12 @@
 module.exports = async (waw) => {
+	const tags = await waw.Tag.find({});
+	console.log(tags);
+	for (const tag of tags) {
+		tag.order = Number(tag.order) || 0;
+		await tag.save();
+	}
+	console.log(tags);
+
 	waw.crud("tag", {
 		create: {
 			ensure: waw.role("admin owner"),
