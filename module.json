@@ -1,7 +1,6 @@
 {
 	"repo": "https://github.com/WebArtWork/waw-tag.git",
 	"name": "Tag",
-	"router": "tags.js categories.js group.js schema_category.js",
 	"crud": [
 		{
 			"name": "tag",
@@ -18,13 +17,6 @@
 					"order",
 					"data"
 				]
-			},
-			"delete": [""]
-		},
-		{
-			"name": "category",
-			"update": {
-				"keys": ["name", "description", "group", "data"]
 			},
 			"delete": [""]
 		}
