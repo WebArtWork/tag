@@ -3,6 +3,26 @@ module.exports = async (waw) => {
 		create: {
 			ensure: waw.role("admin owner"),
 		},
+		unique: {
+			name: 'url',
+			ensure: waw.role("admin owner"),
+			query: (req) => {
+				return req.user.is.admin
+					? {}
+					: {
+						$or: [
+							{
+								global: true,
+								_id: req.body._id
+							},
+							{
+								author: req.user._id,
+								_id: req.body._id
+							},
+						],
+					};
+			}
+		},
 		get: {
 			ensure: waw.role("admin owner"),
 			query: (req) => {
