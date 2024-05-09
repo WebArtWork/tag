@@ -1,25 +1,23 @@
 {
 	"repo": "https://github.com/WebArtWork/waw-tag.git",
 	"name": "Tag",
-	"crud": [
-		{
-			"name": "tag",
-			"update": {
-				"keys": [
-					"enabled",
-					"name",
-					"description",
-					"thumb",
-					"parent",
-					"children",
-					"stores",
-					"global",
-					"order",
-					"data"
-				]
-			},
-			"delete": [""]
-		}
-	],
+	"crud": {
+		"unique": ["url"],
+		"update": {
+			"keys": [
+				"enabled",
+				"name",
+				"description",
+				"thumb",
+				"parent",
+				"children",
+				"stores",
+				"global",
+				"order",
+				"data"
+			]
+		},
+		"delete": [""]
+	},
 	"dependencies": {}
 }

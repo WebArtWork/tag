@@ -13,6 +13,7 @@ module.exports = async function (waw) {
 			default: false
 		},
 		data: {},
+		url: { type: String, sparse: true, trim: true, unique: true },
 		parent: { type: waw.mongoose.Schema.Types.ObjectId, ref: "Tag" },
 		author: { type: waw.mongoose.Schema.Types.ObjectId, ref: "User" },
 		children: [{ type: waw.mongoose.Schema.Types.ObjectId, ref: "Tag" }],
@@ -31,6 +32,9 @@ module.exports = async function (waw) {
 		this.parent = obj.parent;
 		this.children = obj.children;
 		this.stores = obj.stores;
+		if (obj.url) {
+			this.url = obj.url;
+		}
 	};
 
 	return waw.Tag = waw.mongoose.model("Tag", Schema);
